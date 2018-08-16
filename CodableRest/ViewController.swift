@@ -9,10 +9,20 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    private var apiClient = APIClient()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        apiClient.send(GetPosts()) { (response) in
+            switch response {
+            case .success(let posts):
+                print(posts)
+            case .failure(let error):
+                print(error.rawValue)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
